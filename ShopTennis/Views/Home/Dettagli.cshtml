@@ -1,0 +1,62 @@
+﻿@model ShopTennis.Models.Prodotti
+
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+<h2>Dettagli</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Prodotti</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                  
+                    <dd>
+                        @Html.DisplayFor(model => model.IdProdotto)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Descrizione)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Descrizione)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Prezzo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Prezzo)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <img src="@Model.Immagine" alt="Immagine prodotto" class="img-fluid" />
+                <img src="@Model.Immagine2" alt="Immagine prodotto" class="img-fluid" />
+                <img src="@Model.Immagine3" alt="Immagine prodotto" class="img-fluid" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.IdProdotto }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary" })
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

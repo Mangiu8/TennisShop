@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ShopTennis.Models.Prodotti>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="@item.Immagine" alt="@item.Nome">
+                <div class="caption">
+                    <h3>@item.Nome</h3>
+                    <p>@item.Descrizione</p>
+                    <p>
+                        @Html.ActionLink("Dettagli", "Dettagli", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Modifica", "Edit", new { id = item.IdProdotto }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Elimina", "Delete", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
