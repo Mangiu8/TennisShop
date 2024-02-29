@@ -10,5 +10,8 @@
         public string Immagine2 { get; set; }
         public string Immagine3 { get; set; }
         public bool Disponibile { get; set; }
+        public string FilePath1 { get; set; }
+        public string FilePath2 { get; set; }
+        public string FilePath3 { get; set; }
     }
 }

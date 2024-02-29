@@ -1,29 +1,32 @@
-﻿@model IEnumerable<ShopTennis.Models.Prodotti>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Product", "AddProduct", "Upload")
+
 </p>
-<div>
+<div class="d-flex flex-lg-row" >
     @foreach (var item in Model)
     {
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img src="@item.Immagine" alt="@item.Nome">
-                <div class="caption">
-                    <h3>@item.Nome</h3>
-                    <p>@item.Descrizione</p>
-                    <p>
-                        @Html.ActionLink("Dettagli", "Dettagli", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Modifica", "Edit", new { id = item.IdProdotto }, new { @class = "btn btn-secondary" })
-                        @Html.ActionLink("Elimina", "Delete", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+        if (item.Disponibile == true)
+        {
+            <div class="col-4 m-1 border-3 border-info" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); background-color: #f8f9fa; display: flex; flex-direction: column; align-items: center;">
+                <div class="thumbnail">
+                    <img src="../@item.Immagine" alt="@item.Nome" style="margin: auto;">
+                    <div class="caption" style="text-align: center;">
+                        <h3>@item.Nome</h3>
+                        <p>@item.Descrizione</p>
+                        <p>
+                            @Html.ActionLink("Dettagli", "Dettagli", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Modifica", "Edit", new { id = item.IdProdotto }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("Elimina", "Delete", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
 </div>

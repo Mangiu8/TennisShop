@@ -13,10 +13,6 @@
         <div class="row">
             <div class="col-md-6">
                 <dl class="dl-horizontal">
-                  
-                    <dd>
-                        @Html.DisplayFor(model => model.IdProdotto)
-                    </dd>
 
                     <dt>
                         @Html.DisplayNameFor(model => model.Nome)
@@ -44,9 +40,9 @@
                 </dl>
             </div>
             <div class="col-md-6">
-                <img src="@Model.Immagine" alt="Immagine prodotto" class="img-fluid" />
-                <img src="@Model.Immagine2" alt="Immagine prodotto" class="img-fluid" />
-                <img src="@Model.Immagine3" alt="Immagine prodotto" class="img-fluid" />
+                <img src="../../@Model.Immagine" alt="Immagine prodotto" class="img-fluid" />
+                <img src="../../@Model.Immagine2" alt="Immagine prodotto" class="img-fluid" />
+                <img src="../../@Model.Immagine3" alt="Immagine prodotto" class="img-fluid" />
             </div>
         </div>
         <hr />

@@ -1,5 +1,4 @@
 ﻿using ShopTennis.Models;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -45,7 +44,7 @@ namespace ShopTennis.Controllers
         }
 
         [HttpGet]
-        public ActionResult Dettagli(int id)
+        public ActionResult Dettagli(int? id)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ConnectionString.ToString();
             SqlConnection con = new SqlConnection(connectionString);
@@ -76,10 +75,11 @@ namespace ShopTennis.Controllers
             {
                 con.Close();
             }
+
             return View(prodotto);
         }
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ConnectionString.ToString();
             SqlConnection con = new SqlConnection(connectionString);
@@ -145,28 +145,66 @@ namespace ShopTennis.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Create()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ToString();
-            SqlConnection conn = new SqlConnection(connectionString);
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Create(Prodotti prodotto)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ConnectionString.ToString();
+            SqlConnection con = new SqlConnection(connectionString);
             try
             {
-                conn.Open();
-                string query = "UPDATE ScarpeTennis SET IsVisible = 0 WHERE IDProdotto = " + id;
-                SqlCommand cmd = new SqlCommand(query, conn);
+                con.Open();
+                string query = "INSERT INTO ScarpeTennis (Nome, Descrizione, Prezzo, Immagine, Immagine2, Immagine3, Disponibile) VALUES (@Nome, @Descrizione, @Prezzo, @Immagine, @Immagine2, @Immagine3, @Disponibile)";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@Nome", prodotto.Nome);
+                cmd.Parameters.AddWithValue("@Descrizione", prodotto.Descrizione);
+                cmd.Parameters.AddWithValue("@Prezzo", prodotto.Prezzo);
+                cmd.Parameters.AddWithValue("@Immagine", prodotto.Immagine);
+                cmd.Parameters.AddWithValue("@Immagine2", prodotto.Immagine2);
+                cmd.Parameters.AddWithValue("@Immagine3", prodotto.Immagine3);
+                cmd.Parameters.AddWithValue("@Disponibile", prodotto.Disponibile);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                throw ex;
+                ViewBag.Message = ex.Message;
             }
             finally
             {
-                conn.Close();
+                con.Close();
             }
-            return View();
+
+            return RedirectToAction("Index");
         }
+
+        //public ActionResult Delete(int? id)
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ToString();
+        //    SqlConnection conn = new SqlConnection(connectionString);
+
+        //    try
+        //    {
+        //        conn.Open();
+        //        string query = "UPDATE ScarpeTennis SET IsVisible = 0 WHERE IDProdotto = " + id;
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //    return View();
+        //}
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
